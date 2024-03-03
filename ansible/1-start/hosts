@@ -1,0 +1,7 @@
+[webserver]
+xxx.xxx.xxx.xxx
+xxx.xxx.xxx.xxx
+
+[webserver:vars]
+ansible_ssh_private_key_file=/Users/seven/.ssh/ansible.pem
+ansible_user=root
