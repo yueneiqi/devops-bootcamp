@@ -24,7 +24,9 @@ Notes and projects for techworld with Nana devops bootcamp [[course outline]](ht
 
 ## Aliyun
 
-[region reference](https://www.alibabacloud.com/help/en/ecs/product-overview/regions-and-zones#section-m1s-hfg-17f)
+- [region reference](https://www.alibabacloud.com/help/en/ecs/product-overview/regions-and-zones#section-m1s-hfg-17f)
+- [demo: cloud-native-web-hosting](https://github.com/alibabacloud-howto/solution-cloud-native-web-hosting/blob/main/deployment/terraform/main.tf)
+- [demo: e-commerce-application](https://github.com/alibabacloud-howto/solution-mongodb-labs/blob/main/e-commerce-application/deployment/terraform/main.tf)
 
 ~/.aliyun/config.json
 
