@@ -27,6 +27,7 @@ Notes and projects for techworld with Nana devops bootcamp [[course outline]](ht
 - [region reference](https://www.alibabacloud.com/help/en/ecs/product-overview/regions-and-zones#section-m1s-hfg-17f)
 - [demo: cloud-native-web-hosting](https://github.com/alibabacloud-howto/solution-cloud-native-web-hosting/blob/main/deployment/terraform/main.tf)
 - [demo: e-commerce-application](https://github.com/alibabacloud-howto/solution-mongodb-labs/blob/main/e-commerce-application/deployment/terraform/main.tf)
+- [tutorial: k8s-ack](https://help.aliyun.com/zh/ack/ack-managed-and-ack-dedicated/developer-reference/use-terraform-to-create-an-ack-managed-cluster)
 
 ~/.aliyun/config.json
 
