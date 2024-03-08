@@ -19,7 +19,6 @@ Notes and projects for techworld with Nana devops bootcamp [[course outline]](ht
 ## Related topics
 
 - [devops roadmap](https://roadmap.sh/devops)
-- https://gitlab.com/nanuchi/terraform-learn
 - https://gitlab.com/nanuchi/python-automation
 
 ## Aliyun
@@ -32,6 +31,8 @@ Notes and projects for techworld with Nana devops bootcamp [[course outline]](ht
 ~/.aliyun/config.json
 
 ## Terraform
+
+- https://gitlab.com/nanuchi/terraform-learn
 
 Projects:
 
@@ -46,3 +47,14 @@ Projects:
 ### Project
 
 - use digitalocean droplet, aws ec2, and aliyun ecs for ansible automation
+
+## Jenkins
+
+- [Jenkins plugins](https://plugins.jenkins.io/)
+- [Jenkins best practices](https://www.lambdatest.com/blog/jenkins-best-practices/)
+
+## Kubernetes
+
+- [K8s CLI cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+- [Configuration best practices](https://kubernetes.io/docs/concepts/configuration/overview/)
+- [9 security best practices](https://www.cncf.io/blog/2019/01/14/9-kubernetes-security-best-practices-everyone-must-follow/)

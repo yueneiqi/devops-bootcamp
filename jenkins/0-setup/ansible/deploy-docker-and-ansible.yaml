@@ -1,0 +1,95 @@
+---
+- name: Wait for ssh connection
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure ssh port open
+      ansible.builtin.wait_for:
+        port: 22
+        delay: 10
+        timeout: 100
+        search_regex: OpenSSH
+        host: '{{ (ansible_ssh_host | default(ansible_host)) | default(inventory_hostname) }}'
+      vars:
+        ansible_connection: local
+
+- name: Set up Docker's apt repository
+  hosts: all
+  become: true
+  tasks:
+    - name: Update apt-get repo and cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
+
+    - name: Create directory for Docker's official GPG key
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Download Docker's official GPG key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+
+    - name: Add Docker repository to Apt sources
+      ansible.builtin.shell:
+        # yamllint disable rule:line-length
+        cmd: |
+          set -o pipefail && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+        # yamllint enable rule:line-length
+        executable: /bin/bash
+      register: my_output
+      changed_when: my_output.rc != 0
+
+    - name: Update apt-get repo and cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+- name: Install python3, docker, docker-compose
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Install python3 and docker
+      ansible.builtin.apt:
+        name:
+          - python3
+          - python3-pip
+          - python3-docker
+          - python3-compose
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        update_cache: true
+        state: present
+    - name: Start docker daemon
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+
+- name: Start docker containers
+  hosts: all
+  vars_files:
+    - project-vars
+  tasks:
+    - name: Copy docker compose
+      ansible.builtin.copy:
+        src: '{{ docker_compose_local_path }}'
+        dest: /root/docker-compose.yaml
+        mode: preserve
+    - name: Start container from compose
+      community.docker.docker_compose:
+        project_src: /root
