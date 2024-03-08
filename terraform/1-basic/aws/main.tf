@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-3"
+  region = "ap-northeast-1"
 }
 
 variable cidr_blocks {
@@ -11,7 +11,7 @@ variable cidr_blocks {
 }
 
 variable avail_zone {
-  default = "eu-west-3a"
+  default = "ap-northeast-1a"
 }
 
 resource "aws_vpc" "myapp-vpc" {
@@ -45,7 +45,7 @@ data "aws_vpc" "existing_vpc" {
 resource "aws_subnet" "dev-subnet-2" {
   vpc_id = data.aws_vpc.existing_vpc.id
   cidr_block = "172.31.48.0/20"
-  availability_zone = "eu-west-3a"
+  availability_zone = "ap-northeast-1a"
   tags = {
       Name = "subnet-2-default"
   }

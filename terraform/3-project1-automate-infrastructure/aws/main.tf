@@ -1,5 +1,5 @@
 provider "aws" {
-    region = "eu-west-3"
+    region = "ap-northeast-1"
 }
 
 resource "aws_vpc" "myapp-vpc" {
